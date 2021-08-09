@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+
+  jenkins:
+    build:
+      context: ./jenkins
+      args: 
+        dockerGroupID: ${DOCKER_GROUP_ID}
+    volumes:
+      - type: volume
+        source: jenkins_home
+        target: /var/jenkins_home
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+    ports:
+      - "8080:8080"
+
+volumes:
+  jenkins_home:
+  cutiebot_database:
